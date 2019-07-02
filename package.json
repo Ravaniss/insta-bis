@@ -1,0 +1,11 @@
+{
+  "name": "insta-bis",
+  "version": "1.0.0",
+  "description": "An Instagram bis",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "SENECHAL Maxime <senechal.max06@gmail.com>",
+  "license": "MIT"
+}
