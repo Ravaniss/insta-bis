@@ -4,7 +4,7 @@
   "description": "An Instagram bis",
   "main": "server.js",
   "scripts": {
-	  "dev": "nodemon server",
+    "dev": "nodemon server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "SENECHAL Maxime <senechal.max06@gmail.com>",
