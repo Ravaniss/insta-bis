@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const tslib_1 = require("tslib");
+const process_1 = tslib_1.__importDefault(require("process"));
+const port = process_1.default.env.PORT || 3000;
+exports.port = port;
+const mongo_uri = process_1.default.env.MONGO_URI || 'mongodb://127.0.0.1:27017/instagram';
+exports.mongo_uri = mongo_uri;
+const secret = process_1.default.env.SECRET || 'S4CR4T';
+exports.secret = secret;
