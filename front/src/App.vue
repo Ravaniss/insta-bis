@@ -11,9 +11,4 @@
     background-color: #F7F7F7;
     font-family: 'Roboto', Helvetica, sans-serif;
   }
-
-  #app {
-    width: 100vw;
-    min-height: 100vh;
-  }
 </style>
