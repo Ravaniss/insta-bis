@@ -17,10 +17,12 @@ export default new Vuex.Store({
       state.isAuthenticated = localStorage.getItem('jwt') !== null
     },
     [LOGIN] (state, token) {
+      state.isAuthenticated = true
       localStorage.setItem('jwt', token)
       router.push('/')
     },
     [LOGOUT] (state) {
+      state.isAuthenticated = false
       localStorage.removeItem('jwt')
       router.push('/login')
     }
