@@ -10,12 +10,35 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     api: 'http://localhost:3000/',
-    isAuthenticated: false
+    isAuthenticated: false,
+    feed:[
+      {
+        id: 0,
+        user_id: 0,
+        display_name: 'Fred Flintstone',
+        desc: 'Look at my car...',
+        image: 'https://www.ebaymotorsblog.com/motors/blog/wp-content/uploads/2016/04/flintmobile-3-1200.jpg',
+        timestamp: 1551052800000
+      },
+      {
+        id: 1,
+        user_id: 1,
+        display_name: 'Scooby Doo',
+        desc: 'Pizza!',
+        image: 'https://vignette.wikia.nocookie.net/scoobydoo/images/7/72/Blockbuster_Pizza.png/revision/latest?cb=20150118170044',
+        timestamp: 1551052800000
+      },
+      {
+        id: 2,
+        user_id: 2,
+        display_name: 'GOku SOn',
+        desc: 'Kaaaameeeehaaameeeehaaaaaaaaa!!',
+        image: 'https://i.imgur.com/sVwP9md.jpg',
+        timestamp: 1551052800000
+      }
+    ]
   },
   mutations: {
-    isAuthenticated (state) {
-      state.isAuthenticated = localStorage.getItem('jwt') !== null
-    },
     [LOGIN] (state, token) {
       state.isAuthenticated = true
       localStorage.setItem('jwt', token)
