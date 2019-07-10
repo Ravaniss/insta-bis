@@ -4,20 +4,15 @@ import mongoose = require('mongoose')
 import { port, mongo_uri } from './config'
 import { router } from './routes/user'
 
+const cors = require('cors')
+
 mongoose.connect(mongo_uri, { useNewUrlParser: true })
   .then(() => {
     const app: any = express()
 
-    const cors = (req: any, res: any, next: any) => {
-      res.header('Access-Control-Allow-Origin', '*')
-      res.header('Access-Control-Allow-Methods', '*')
-      res.header('Access-Control-Allow-Headers', '*')
-      next()
-    }
-
     app.use(express.urlencoded({extended: true}))
     app.use(express.json())
-    app.use(cors)
+    app.use(cors())
 
     app.use('/user', router)
 
