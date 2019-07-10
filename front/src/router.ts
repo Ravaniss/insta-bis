@@ -1,10 +1,10 @@
-import Vue from 'vue';
-import Router from 'vue-router';
-import Home from './views/Home.vue';
-import Login from "@/views/Login.vue";
-import Register from "@/views/Register.vue";
+import Vue from 'vue'
+import Router from 'vue-router'
+import Home from './views/Home.vue'
+import Login from "@/views/Login.vue"
+import Register from "@/views/Register.vue"
 
-Vue.use(Router);
+Vue.use(Router)
 
 let router = new Router({
   mode: 'history',
@@ -35,7 +35,7 @@ let router = new Router({
       }
     }
   ],
-});
+})
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
@@ -52,4 +52,4 @@ router.beforeEach((to, from, next) => {
   }
 })
 
-export default router;
+export default router
