@@ -27,7 +27,8 @@ const user = new mongoose.Schema({
 
 user.pre('save', async function (next) {
   let user: any = this
-  if (!user.isModified('password')) return next()
+  if (!user.isModified('password'))
+    return next()
 
   user.password = await Password.hash(user.password)
 })

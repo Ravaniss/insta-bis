@@ -7,16 +7,13 @@ const model = require('./model');
 module.exports = {
     login: (req, res) => {
         model.findOne({ email: req.body.email }, (err, user) => tslib_1.__awaiter(this, void 0, void 0, function* () {
-            if (err) {
+            if (err)
                 return res.status(500).send({ auth: false, msg: err });
-            }
-            if (!user) {
+            if (!user)
                 return res.send({ auth: false, msg: 'Email or Password did not match' });
-            }
             const isMatch = yield user.comparePassword(user.password, req.body.password);
-            if (!isMatch) {
+            if (!isMatch)
                 return res.send({ auth: false, msg: 'Email or Password did not match' });
-            }
             const token = jwt.sign({ id: user._id }, config_1.secret, { expiresIn: 86400 });
             res.status(200).send({ auth: true, token });
         }));
@@ -34,9 +31,8 @@ module.exports = {
             res.status(200).send({ auth: true, token });
         })
             .catch((e) => {
-            if (e.code === 11000) {
+            if (e.code === 11000)
                 return res.send({ auth: false, msg: 'Email already exists...' });
-            }
             res.send({ auth: false, msg: 'An internal server error has occurred' });
         });
     }
