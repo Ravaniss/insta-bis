@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 import router from './router'
 
-import { LOGIN, LOGOUT } from './mutation-types'
+import { LOGIN, LOGOUT, GETPOSTS } from './mutation-types'
 
 Vue.use(Vuex)
 
@@ -11,7 +11,7 @@ export default new Vuex.Store({
   state: {
     api: 'http://localhost:3000/',
     isAuthenticated: false,
-    feed:[
+    posts: [
       {
         id: 0,
         user_id: 0,
@@ -31,7 +31,7 @@ export default new Vuex.Store({
       {
         id: 2,
         user_id: 2,
-        display_name: 'GOku SOn',
+        display_name: 'Goku Son',
         desc: 'Kaaaameeeehaaameeeehaaaaaaaaa!!',
         image: 'https://i.imgur.com/sVwP9md.jpg',
         timestamp: 1551052800000
@@ -48,6 +48,12 @@ export default new Vuex.Store({
       state.isAuthenticated = false
       localStorage.removeItem('jwt')
       router.push('/login')
+    },
+    [GETPOSTS] (state, posts) {
+      console.log(posts)
+      if (posts.length > 0) {
+        state.posts = posts
+      }
     }
   },
   actions: {

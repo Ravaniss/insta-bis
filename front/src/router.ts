@@ -1,9 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import axios from 'axios'
+
 import Home from './views/Home.vue'
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
 import Post from '@/views/Post.vue'
+import store from '@/store'
 
 Vue.use(Router)
 
@@ -44,6 +47,17 @@ const router = new Router({
       }
     }
   ]
+})
+
+router.onReady(() => {
+  axios.get(store.state.api + 'post/getposts')
+    .then((response: any) => {
+      console.log(response)
+        store.commit('GETPOSTS', response.data)
+    })
+    .catch((err: any) => {
+      throw err
+    })
 })
 
 router.beforeEach((to, from, next) => {

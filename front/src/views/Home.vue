@@ -1,6 +1,6 @@
 <template>
-  <main class="view feed">
-    <article class="post" v-for="post in feed" :key="post.id">
+  <main class="view posts">
+    <article class="post" v-for="post in posts" :key="post.id">
       <header class="postUser">{{ post.display_name }}</header>
       <section class="postPicture">
         <img :src="post.image" alt="post.desc" class="postImage">
@@ -25,8 +25,8 @@ import store from '@/store'
 @Component({
   store,
   computed: {
-    feed () {
-      return this.$store.state.feed;
+    posts () {
+      return this.$store.state.posts
     }
   },
   methods: {
@@ -37,18 +37,19 @@ import store from '@/store'
 })
 export default class Home extends Vue {
   timestampToDate (timestamp: any) {
+    timestamp = Number(timestamp)
     let d = new Date(timestamp)
     let year = d.getFullYear()
     let month: any = d.getMonth() + 1
     if (month < 10) {
-      month = '0' + month;
+      month = '0' + month
     }
 
     let day: any = d.getDate()
     if (day < 10) {
-      day = '0' + day;
+      day = '0' + day
     }
-    return day + '/' + month + '/' + year;
+    return day + '/' + month + '/' + year
   }
 }
 </script>
