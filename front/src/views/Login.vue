@@ -6,8 +6,8 @@
     </header>
     <main class="form-group">
       <input type="text" v-model="email" placeholder="Email">
-      <input type="text" v-model="password" placeholder="Password">
-      <button class="login-btn">Log in</button>
+      <input type="password" v-model="password" placeholder="Password">
+      <button class="login-btn" @click="login()">Log in</button>
     </main>
     <footer>
       <p>
@@ -22,8 +22,30 @@
 
   @Component
   export default class Login extends Vue {
-    email: string = ''
-    password: string = ''
+    email: string = 'itsme@gmail.com'
+    password: string = 'root'
+    api: string = this.$store.state.api
+
+    public login () {
+      if (!this.email || !this.password) {
+        alert('Please fill in all fields')
+        return false
+      }
+
+      this.$http.post(this.api + 'user/login', {
+        email: this.email,
+        password: this.password
+      }).then((response: any) => {
+        if (response.data.auth) {
+          localStorage.setItem('jwt', response.data.token)
+          this.$router.push('/')
+        }
+        console.log(localStorage.getItem('jwt'))
+      }).catch((err: any) => {
+        console.log(err)
+      })
+
+    }
   }
 </script>
 
