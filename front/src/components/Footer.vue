@@ -1,12 +1,23 @@
 <template>
   <footer>
-    <button>Home</button>
+    <button @click="goto('/')">Home</button>
     <button>Global</button>
-    <button>Post</button>
+    <button @click="goto('/newpost')">Post</button>
     <button>Notifications</button>
     <button>Profile</button>
   </footer>
 </template>
+
+<script lang="ts">
+  import { Component, Vue } from 'vue-property-decorator'
+
+  @Component
+  export default class Footer extends Vue {
+    goto (path: string) {
+      this.$router.push(path)
+    }
+  }
+</script>
 
 <style lang="scss" scoped>
   footer {
