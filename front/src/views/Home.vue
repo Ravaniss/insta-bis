@@ -1,5 +1,5 @@
 <template>
-  <main class="feed">
+  <main class="view feed">
     <article class="post" v-for="post in feed" :key="post.id">
       <header class="postUser">{{ post.display_name }}</header>
       <section class="postPicture">
@@ -54,25 +54,21 @@ export default class Home extends Vue {
 </script>
 
 <style lang="scss">
-  .feed {
-    padding: 40px 0;
+  .post {
+    background-color: #FFF;
+    padding-bottom: 15px;
 
-    .post {
-      background-color: #FFF;
-      padding-bottom: 15px;
+    .postUser {
+      display: flex;
+      align-items: center;
+      height: 30px;
+    }
 
-      .postUser {
-        display: flex;
-        align-items: center;
-        height: 30px;
-      }
+    .postPicture {
+      width: 100%;
 
-      .postPicture {
+      .postImage {
         width: 100%;
-
-        .postImage {
-          width: 100%;
-        }
       }
     }
   }

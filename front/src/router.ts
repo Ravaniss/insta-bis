@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
+import Post from '@/views/Post.vue'
 
 Vue.use(Router)
 
@@ -32,6 +33,14 @@ const router = new Router({
       component: Register,
       meta: {
         requiresAuth: false
+      }
+    },
+    {
+      path: '/newpost',
+      name: 'post',
+      component: Post,
+      meta: {
+        requiresAuth: true
       }
     }
   ]

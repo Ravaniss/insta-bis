@@ -26,6 +26,10 @@
 </script>
 
 <style lang="scss">
+  .view {
+    padding: 40px 0;
+  }
+
   body {
     margin: 0;
     padding: 0;
