@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const router = require('express').Router();
-exports.router = router;
+const userRouter = require('express').Router();
+exports.userRouter = userRouter;
 const controller = require('./controller');
-router.post('/login', controller.login);
-router.post('/register', controller.register);
+userRouter.post('/login', controller.login);
+userRouter.post('/register', controller.register);
