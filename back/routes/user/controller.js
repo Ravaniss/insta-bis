@@ -13,11 +13,11 @@ module.exports = {
             }
             const isMatch = yield user.comparePassword(user.password, req.body.password);
             if (!isMatch) {
-                res.status(500).send({ msg: 'Email or Password did not match' });
+                res.status(500).send({ auth: false, msg: 'Email or Password did not match' });
                 return false;
             }
             const token = jwt.sign({ id: user._id }, config_1.secret, { expiresIn: 86400 });
-            res.status(200).send({ msg: 'Login Successful', token });
+            res.status(200).send({ auth: true, token });
         }));
     },
     register: (req, res) => {
