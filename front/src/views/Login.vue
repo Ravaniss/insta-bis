@@ -50,7 +50,7 @@
         password: this.password
       }).then((response: any) => {
         if (response.data.auth) {
-          this.login()
+          this.login(response.data.token)
         } else {
           this.error = response.data.msg
           this.hasErrors = true
