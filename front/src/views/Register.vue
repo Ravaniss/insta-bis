@@ -7,9 +7,12 @@
     <main class="form-group">
       <input type="text" v-model="forename" placeholder="Forename">
       <input type="text" v-model="surname" placeholder="Surname">
-      <input type="text" v-model="email" placeholder="Email">
-      <input type="text" v-model="password" placeholder="Password">
-      <button class="login-btn">Register</button>
+      <input type="email" v-model="email" placeholder="Email" :class="(hasErrors) ? 'err' : ''">
+      <input type="password" v-model="password" placeholder="Password">
+      <button class="login-btn" @click="register()">Register</button>
+      <div class="errorMsg" v-if="hasErrors">
+        {{ error }}
+      </div>
     </main>
     <footer>
       <p>
@@ -25,10 +28,38 @@
 
   @Component
   export default class Register extends Vue {
-    email: string = ''
-    password: string = ''
     forename: string = ''
     surname: string = ''
+    email: string = ''
+    password: string = ''
+    hasErrors: boolean = false
+    error: string = ''
+
+    register () {
+      if (!this.forename || !this.surname || !this.email || !this.password) {
+        alert('Please fill in all fields')
+        return false
+      }
+
+      this.$http.post(this.$store.state.api + 'user/register', {
+        forename: this.forename,
+        surname: this.surname,
+        email: this.email,
+        password: this.password
+      }).then((response: any) => {
+        if (response.data.auth) {
+          localStorage.setItem('jwt', response.data.token)
+          this.$router.push('/')
+        } else {
+          this.error = response.data.msg
+          this.hasErrors = true
+        }
+      }).catch((err: any) => {
+        this.error = err
+        this.hasErrors = true
+      })
+
+    }
   }
 </script>
 
@@ -58,45 +89,6 @@
         font-weight: 300;
         margin: 0;
         padding: 0;
-      }
-    }
-
-    .form-group {
-      flex: 1;
-      display: flex;
-      justify-content: flex-start;
-      flex-flow: column;
-      padding: 25px;
-
-      input {
-        width: 100%;
-        height: 30px;
-        border: 1px solid #DDD;
-        margin-bottom: 15px;
-        text-indent: 5px;
-        background-color: #EEE;
-        outline: none;
-
-        &:hover {
-          cursor: pointer;
-        }
-
-        &:focus {
-          border: 1px solid #AAA;
-        }
-      }
-
-      button {
-        width: 100%;
-        height: 30px;
-        background: #FFCE00;
-        appearance: none;
-        border: none;
-        outline: none;
-        border-radius: 8px;
-        color: #171717;
-        font-size: 18px;
-        font-weight: 700;
       }
     }
 

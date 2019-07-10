@@ -5,9 +5,12 @@
       <h4>Login</h4>
     </header>
     <main class="form-group">
-      <input type="text" v-model="email" placeholder="Email">
+      <input type="email" v-model="email" placeholder="Email">
       <input type="password" v-model="password" placeholder="Password">
       <button class="login-btn" @click="login()">Log in</button>
+      <div class="errorMsg" v-if="hasErrors">
+        {{ error }}
+      </div>
     </main>
     <footer>
       <p>
@@ -24,7 +27,8 @@
   export default class Login extends Vue {
     email: string = 'itsme@gmail.com'
     password: string = 'root'
-    api: string = this.$store.state.api
+    hasErrors: boolean = false
+    error: string = ''
 
     public login () {
       if (!this.email || !this.password) {
@@ -32,15 +36,17 @@
         return false
       }
 
-      this.$http.post(this.api + 'user/login', {
+      this.$http.post(this.$store.state.api + 'user/login', {
         email: this.email,
         password: this.password
       }).then((response: any) => {
         if (response.data.auth) {
           localStorage.setItem('jwt', response.data.token)
           this.$router.push('/')
+        } else {
+          this.error = response.data.msg
+          this.hasErrors = true
         }
-        console.log(localStorage.getItem('jwt'))
       }).catch((err: any) => {
         console.log(err)
       })
@@ -75,45 +81,6 @@
         font-weight: 300;
         margin: 0;
         padding: 0;
-      }
-    }
-
-    .form-group {
-      flex: 1;
-      display: flex;
-      justify-content: flex-start;
-      flex-flow: column;
-      padding: 25px;
-
-      input {
-        width: 100%;
-        height: 30px;
-        border: 1px solid #DDD;
-        margin-bottom: 15px;
-        text-indent: 5px;
-        background-color: #EEE;
-        outline: none;
-        
-        &:hover {
-          cursor: pointer;
-        }
-
-        &:focus {
-          border: 1px solid #AAA;
-        }
-      }
-      
-      button {
-        width: 100%;
-        height: 30px;
-        background: #FFCE00;
-        appearance: none;
-        border: none;
-        outline: none;
-        border-radius: 8px;
-        color: #171717;
-        font-size: 18px;
-        font-weight: 700;
       }
     }
 

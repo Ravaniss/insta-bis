@@ -7,14 +7,15 @@ const model = require('./model');
 module.exports = {
     login: (req, res) => {
         model.findOne({ email: req.body.email }, (err, user) => tslib_1.__awaiter(this, void 0, void 0, function* () {
-            if (err || !user) {
-                res.status(500).send({ msg: 'Email or Password did not match' });
-                return false;
+            if (err) {
+                return res.status(500).send({ auth: false, msg: err });
+            }
+            if (!user) {
+                return res.send({ auth: false, msg: 'Email or Password did not match' });
             }
             const isMatch = yield user.comparePassword(user.password, req.body.password);
             if (!isMatch) {
-                res.status(500).send({ auth: false, msg: 'Email or Password did not match' });
-                return false;
+                return res.send({ auth: false, msg: 'Email or Password did not match' });
             }
             const token = jwt.sign({ id: user._id }, config_1.secret, { expiresIn: 86400 });
             res.status(200).send({ auth: true, token });
@@ -29,12 +30,14 @@ module.exports = {
         });
         newUser.save()
             .then((result) => {
-            console.log(result);
-            res.status(200).send({ msg: 'Register Successful', user_id: result._id });
+            const token = jwt.sign({ id: result._id }, config_1.secret, { expiresIn: 86400 });
+            res.status(200).send({ auth: true, token });
         })
             .catch((e) => {
-            console.log(e);
-            res.status(500).send({ msg: 'Register Unsuccessful' });
+            if (e.code === 11000) {
+                return res.send({ auth: false, msg: 'Email already exists...' });
+            }
+            res.send({ auth: false, msg: 'An internal server error has occurred' });
         });
     }
 };
