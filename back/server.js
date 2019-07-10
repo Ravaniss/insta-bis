@@ -8,8 +8,8 @@ const cors = require('cors');
 mongoose.connect(config_1.mongo_uri, { useNewUrlParser: true })
     .then(() => {
     const app = express();
-    app.use(express.urlencoded({ extended: true }));
-    app.use(express.json());
+    app.use(express.urlencoded({ limit: '50mb', extended: true }));
+    app.use(express.json({ limit: '50mb' }));
     app.use(cors());
     app.use('/user', user_1.router);
     app.listen(config_1.port, console.log(`Server has started on http://localhost:${config_1.port}`));
