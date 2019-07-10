@@ -5,3 +5,26 @@
     </h3>
   </header>
 </template>
+
+<style lang="scss" scoped>
+  header {
+    width: 100vw;
+    height: 40px;
+    background-color: #EEE;
+    border-bottom: 1px solid #CCC;
+
+    .title {
+      margin: 0;
+      padding: 0;
+      color: #171717;
+      font-size: 28px;
+      line-height: 40px;
+      text-align: center;
+      font-weight: 900;
+
+      span {
+        font-weight: 300;
+      }
+    }
+  }
+</style>
