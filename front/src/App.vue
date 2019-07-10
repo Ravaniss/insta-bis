@@ -1,8 +1,34 @@
 <template>
   <div id="app">
-    <router-view/>
+    <Header v-if="isAuthenticated" />
+    <router-view />
+    <Footer v-if="isAuthenticated" />
   </div>
 </template>
+
+<script lang="ts">
+  import { Component, Vue } from 'vue-property-decorator'
+  import Header from './components/Header.vue'
+  import Footer from './components/Footer.vue'
+
+  @Component({
+    components: {
+      Header,
+      Footer
+    },
+    computed: {
+      isAuthenticated () {
+        return this.$store.state.isAuthenticated
+      }
+    }
+  })
+  export default class Home extends Vue {
+    logout() {
+      localStorage.removeItem('jwt')
+      this.$router.push('/login')
+    }
+  }
+</script>
 
 <style lang="scss">
   body {
