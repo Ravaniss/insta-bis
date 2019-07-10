@@ -7,7 +7,7 @@
     <main class="form-group">
       <input type="email" v-model="email" placeholder="Email">
       <input type="password" v-model="password" placeholder="Password">
-      <button class="login-btn" @click="login()">Log in</button>
+      <button class="login-btn" @click="logIn()">Log in</button>
       <div class="errorMsg" v-if="hasErrors">
         {{ error }}
       </div>
@@ -22,15 +22,24 @@
 
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator'
+  import { mapActions } from 'vuex'
+  import store from '@/store'
 
-  @Component
+  @Component({
+    store,
+    methods: {
+      ...mapActions([
+        'login'
+      ])
+    }
+  })
   export default class Login extends Vue {
     email: string = 'itsme@gmail.com'
     password: string = 'root'
     hasErrors: boolean = false
     error: string = ''
 
-    public login () {
+    public logIn () {
       if (!this.email || !this.password) {
         alert('Please fill in all fields')
         return false
@@ -41,8 +50,7 @@
         password: this.password
       }).then((response: any) => {
         if (response.data.auth) {
-          localStorage.setItem('jwt', response.data.token)
-          this.$router.push('/')
+          this.login()
         } else {
           this.error = response.data.msg
           this.hasErrors = true

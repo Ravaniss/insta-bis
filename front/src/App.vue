@@ -22,12 +22,7 @@
       }
     }
   })
-  export default class Home extends Vue {
-    logout() {
-      localStorage.removeItem('jwt')
-      this.$router.push('/login')
-    }
-  }
+  export default class Home extends Vue {}
 </script>
 
 <style lang="scss">

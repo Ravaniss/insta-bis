@@ -9,12 +9,17 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import { mapActions } from 'vuex'
+import store from '@/store'
 
-@Component
-export default class Home extends Vue {
-  logout() {
-    localStorage.removeItem('jwt')
-    this.$router.push('/login')
+@Component({
+  store,
+  methods: {
+    ...mapActions([
+      'logout'
+    ])
   }
+})
+export default class Home extends Vue {
 }
 </script>
