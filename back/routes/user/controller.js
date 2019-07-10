@@ -7,19 +7,21 @@ const model = require('./model');
 module.exports = {
     login: (req, res) => {
         model.findOne({ email: req.body.email }, (err, user) => tslib_1.__awaiter(this, void 0, void 0, function* () {
-            if (err)
-                throw err;
+            if (err || !user) {
+                res.status(500).send({ msg: 'Email or Password did not match' });
+                return false;
+            }
             const isMatch = yield user.comparePassword(user.password, req.body.password);
             if (!isMatch) {
                 res.status(500).send({ msg: 'Email or Password did not match' });
                 return false;
             }
-            let token = jwt.sign({ id: user._id }, config_1.secret, { expiresIn: 86400 });
+            const token = jwt.sign({ id: user._id }, config_1.secret, { expiresIn: 86400 });
             res.status(200).send({ msg: 'Login Successful', token });
         }));
     },
     register: (req, res) => {
-        let newUser = new model({
+        const newUser = new model({
             forename: req.body.forename,
             surname: req.body.surname,
             email: req.body.email,

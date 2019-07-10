@@ -6,21 +6,25 @@ const model = require('./model')
 module.exports = {
   login: (req: any, res: any) => {
     model.findOne({ email: req.body.email }, async (err: any, user: any) => {
-      if (err) throw err;
-
-      const isMatch = await user.comparePassword(user.password, req.body.password)
-      if (!isMatch) {
+      if (err || !user) {
         res.status(500).send({ msg: 'Email or Password did not match'})
-        return false;
+        return false
       }
 
-      let token = jwt.sign({ id: user._id }, secret, { expiresIn: 86400 })
+      const isMatch = await user.comparePassword(user.password, req.body.password)
+
+      if (!isMatch) {
+        res.status(500).send({ msg: 'Email or Password did not match'})
+        return false
+      }
+
+      const token = jwt.sign({ id: user._id }, secret, { expiresIn: 86400 })
       res.status(200).send({ msg: 'Login Successful', token})
     })
 
   },
   register: (req: any, res: any) => {
-    let newUser = new model({
+    const newUser = new model({
       forename: req.body.forename,
       surname: req.body.surname,
       email: req.body.email,
