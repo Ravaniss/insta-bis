@@ -51,8 +51,8 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    login () {
-      this.commit('LOGIN')
+    login (ctx, token) {
+      this.commit('LOGIN', token)
     },
     logout () {
       this.commit('LOGOUT')
