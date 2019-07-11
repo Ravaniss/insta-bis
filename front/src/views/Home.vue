@@ -10,10 +10,6 @@
         <p class="timestamp">{{ timestampToDate(post.timestamp) }}</p>
       </footer>
     </article>
-
-    <button @click="logout()">
-      Logout
-    </button>
   </main>
 </template>
 
@@ -28,11 +24,6 @@ import store from '@/store'
     posts () {
       return this.$store.state.posts
     }
-  },
-  methods: {
-    ...mapActions([
-      'logout'
-    ])
   }
 })
 export default class Home extends Vue {
