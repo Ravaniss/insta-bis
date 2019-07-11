@@ -56,7 +56,6 @@
           this.hasErrors = true
         }
       }).catch((err: any) => {
-        console.log(err)
       })
 
     }

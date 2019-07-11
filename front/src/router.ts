@@ -61,8 +61,7 @@ const router = new Router({
 router.onReady(() => {
   axios.get(store.state.api + 'post/getposts')
     .then((response: any) => {
-      console.log(response)
-        store.commit('GETPOSTS', response.data)
+      store.commit('GETPOSTS', response.data)
     })
     .catch((err: any) => {
       throw err

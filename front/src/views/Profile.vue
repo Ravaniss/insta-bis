@@ -27,7 +27,6 @@
       this.$http.post(this.$store.state.api + 'user/getprofile', {
         auth_token: localStorage.getItem('jwt')
       }).then(({ data }) => {
-        console.log(data)
         this.display_name = data.details.display_name
         this.posts = data.details.posts
       })

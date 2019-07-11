@@ -50,7 +50,6 @@ export default new Vuex.Store({
       router.push('/login')
     },
     [GETPOSTS] (state, posts) {
-      console.log(posts)
       if (posts.length > 0) {
         state.posts = posts
       }

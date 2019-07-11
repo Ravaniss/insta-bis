@@ -52,7 +52,6 @@
     }
 
     upload () {
-      console.log(this.cap)
       this.$http.post(this.$store.state.api + 'post/newpost', {
         auth_token: localStorage.getItem('jwt'),
         image: this.cap,
@@ -87,7 +86,6 @@
           this.video.srcObject = stream
           this.video.play()
         }).catch((err: any) => {
-          console.log(this.video)
           console.error(err)
         })
       }
