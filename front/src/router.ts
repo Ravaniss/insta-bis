@@ -5,7 +5,7 @@ import axios from 'axios'
 import Home from './views/Home.vue'
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
-import Post from '@/views/Post.vue'
+import Post from '@/views/Camera.vue'
 import Profile from '@/views/Profile.vue'
 import store from '@/store'
 
