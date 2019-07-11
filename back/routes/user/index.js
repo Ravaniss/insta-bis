@@ -5,4 +5,4 @@ exports.userRouter = userRouter;
 const controller = require('./controller');
 userRouter.post('/login', controller.login);
 userRouter.post('/register', controller.register);
-userRouter.post('/getProfile', controller.getProfile);
+userRouter.post('/getprofile', controller.getProfile);
