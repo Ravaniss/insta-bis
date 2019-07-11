@@ -48,12 +48,16 @@ export default class Home extends Vue {
 <style lang="scss">
   .post {
     background-color: #FFF;
+    border-bottom: 1px dashed #BBB;
     padding-bottom: 15px;
 
     .postUser {
       display: flex;
       align-items: center;
-      height: 30px;
+      padding: 15px;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 18px;
     }
 
     .postPicture {
@@ -61,6 +65,22 @@ export default class Home extends Vue {
 
       .postImage {
         width: 100%;
+      }
+    }
+
+    .postDesc {
+      padding: 15px;
+
+      p {
+        color: #171717;
+        font-size: 16px;
+        margin: 0
+      }
+
+      .timestamp {
+        color: #AAA;
+        font-size: 12px;
+        margin-top: 15px;
       }
     }
   }
