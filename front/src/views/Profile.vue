@@ -43,7 +43,6 @@
     display: flex;
     flex-direction: column;
 
-
     .profileHead {
       background: #171717;
       color: #FFF;
