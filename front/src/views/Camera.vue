@@ -11,9 +11,21 @@
         :class="(!captured) ? 'show' : 'hide'"
       ></video>-->
       <div class="postBtns">
-        <button class="captureBtn" @click="capture()" v-if="!captured">Capture</button>
-        <button class="cancelBtn" @click="cancel()" v-if="captured">Cancel</button>
-        <button class="uploadBtn" @click="upload()" v-if="captured">Upload</button>
+        <button class="captureBtn" @click="capture()" v-if="!captured">
+          <i class="material-icons icn-lg">
+            camera
+          </i>
+        </button>
+        <button class="cancelBtn" @click="cancel()" v-if="captured">
+          <i class="material-icons icn-lg">
+            cancel
+          </i>
+        </button>
+        <button class="uploadBtn" @click="upload()" v-if="captured">
+          <i class="material-icons icn-lg">
+            cloud_upload
+          </i>
+        </button>
       </div>
     </section>
     <section :class="(captured) ? 'show' : 'hide'">
@@ -23,8 +35,10 @@
         width="100%"
         height="300"
       ></canvas>
-      <label for="desc">Description: </label>
-      <input type="text" id="desc" name="desc" v-model="desc">
+      <div class="fieldGroup">
+        <label for="desc">Description: </label>
+        <input type="text" id="desc" name="desc" class="inputField" v-model="desc">
+      </div>
     </section>
   </main>
 </template>
@@ -33,7 +47,7 @@
   import { Component, Vue } from 'vue-property-decorator'
 
   @Component
-  export default class Post extends Vue {
+  export default class Camera extends Vue {
     // video: any
     canvas: any
     constraints: any
@@ -94,19 +108,58 @@
 </script>
 
 <style lang="scss">
+  .post {
+    .postBtns {
+      position: absolute;
+      left: 50%;
+      bottom: 65px;
+      transform: translateX(-50%);
+
+      button {
+        appearance: none;
+        border: none;
+        outline: none;
+        background: none;
+        margin: 0 50px 0 0;
+        padding: 0;
+
+        &:last-of-type {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .fieldGroup {
+      padding: 15px;
+      box-sizing: border-box;
+
+      label {
+        color: #888;
+        font-size: 14px;
+      }
+
+      .inputField {
+        display: block;
+        width: 100%;
+        margin: 0 auto;
+        height: 40px;
+        text-indent: 15px;
+        outline: none;
+        border: 1px solid #CCC;
+      }
+    }
+  }
+
+  .icn-lg {
+    font-size: 48px;
+  }
+
   .show {
     display: block;
   }
 
   .hide {
     display: none;
-  }
-
-  .postBtns {
-    position: absolute;
-    bottom: 65px;
-    left: 50%;
-    transform: translateX(-50%);
   }
 
   .image {
