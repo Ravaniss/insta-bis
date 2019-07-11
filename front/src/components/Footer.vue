@@ -1,10 +1,23 @@
 <template>
   <footer>
-    <button @click="goto('/')">Home</button>
-    <button>Global</button>
-    <button @click="goto('/newpost')">Post</button>
-    <button>Notifications</button>
-    <button @click="goto('/profile')">Profile</button>
+    <button
+      @click="goto('/')">
+      <i class="material-icons">home</i>
+    </button>
+    <button>
+      <i class="material-icons">search</i>
+    </button>
+    <button
+      @click="goto('/newpost')">
+      <i class="material-icons">camera</i>
+    </button>
+    <button>
+      <i class="material-icons">announcement</i>
+    </button>
+    <button
+      @click="goto('/profile')">
+      <i class="material-icons">account_box</i>
+    </button>
   </footer>
 </template>
 
@@ -31,5 +44,12 @@
     bottom: 0;
     left: 0;
     right: 0;
+
+    button {
+      appearance: none;
+      border: none;
+      outline: none;
+      background: none;
+    }
   }
 </style>
