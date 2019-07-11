@@ -1,7 +1,7 @@
 <template>
   <main class="view profile">
     <section class="profileHead">
-      {{ display_name }}
+      <strong>Name: </strong>{{ display_name }}
     </section>
 
     <section class="posts">
@@ -45,7 +45,8 @@
 
 
     .profileHead {
-      background: #FFF;
+      background: #171717;
+      color: #FFF;
       padding: 15px;
       box-sizing: border-box;
     }
@@ -55,6 +56,7 @@
       grid-template-columns: repeat(3, 1fr);
       grid-auto-rows: min-content;
       grid-gap: 5px;
+      padding: 5px;
 
       .post {
         padding: 0;
