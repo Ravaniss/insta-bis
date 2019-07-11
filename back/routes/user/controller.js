@@ -4,6 +4,7 @@ const tslib_1 = require("tslib");
 const jwt = tslib_1.__importStar(require("jsonwebtoken"));
 const config_1 = require("../../config");
 const model = require('./model');
+const postModel = require('../post/model');
 module.exports = {
     login: (req, res) => {
         model.findOne({ email: req.body.email }, (err, user) => tslib_1.__awaiter(this, void 0, void 0, function* () {
@@ -34,6 +35,25 @@ module.exports = {
             if (e.code === 11000)
                 return res.send({ auth: false, msg: 'Email already exists...' });
             res.send({ auth: false, msg: 'An internal server error has occurred' });
+        });
+    },
+    getProfile: (req, res) => {
+        // @ts-ignore
+        const userId = jwt.decode(req.body.auth_token).id;
+        model.findById(userId)
+            .then((user) => {
+            if (!user)
+                res.send({ success: false, msg: 'User not found' });
+            postModel.find({ user_id: userId })
+                .then((posts) => {
+                res.send({
+                    success: true,
+                    details: {
+                        display_name: user.forename + ' ' + user.surname,
+                        posts
+                    }
+                });
+            });
         });
     }
 };

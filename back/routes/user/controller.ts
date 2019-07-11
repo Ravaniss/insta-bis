@@ -2,6 +2,7 @@ import * as jwt from 'jsonwebtoken'
 
 import { secret } from '../../config'
 const model = require('./model')
+const postModel = require('../post/model')
 
 module.exports = {
   login: (req: any, res: any) => {
@@ -39,6 +40,27 @@ module.exports = {
           return res.send({ auth: false, msg: 'Email already exists...' })
 
         res.send({ auth: false, msg: 'An internal server error has occurred' })
+      })
+  },
+  getProfile: (req: any, res: any) => {
+    // @ts-ignore
+    const userId = jwt.decode(req.body.auth_token).id
+
+    model.findById(userId)
+      .then((user: any) => {
+        if (!user)
+          res.send({ success: false, msg: 'User not found' })
+
+        postModel.find({ user_id: userId })
+          .then((posts: any) => {
+            res.send({
+              success: true,
+              details: {
+                display_name: user.forename + ' ' + user.surname,
+                posts
+              }
+            })
+          })
       })
   }
 }
